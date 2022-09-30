@@ -9,8 +9,15 @@ import 'package:dio/dio.dart';
 class UserService {
   final UserApi userApi = UserApi(Dio());
 
+  Map<String, bool> openedUsers = <String, bool>{};
+  List<User> listUsers = [];
+
+  void updateOpenedUsers(int userId) {
+    openedUsers['$userId'] = true;
+  }
+
   Future<List<User>> getUsers() async {
-    final List<User> listUsers = await userApi.getUsers();
+    listUsers.addAll(await userApi.getUsers());
     return listUsers;
   }
 

@@ -12,6 +12,7 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
   final UserService userService;
   UsersBloc({required this.userService}) : super(const UsersState.initial()) {
     on<OpenUsersViewEvent>(_onOpenUsers);
+    on<UpdateUsersViewEvent>(_onUpdateUsers);
   }
 
   Future<void> _onOpenUsers(
@@ -21,10 +22,27 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     try {
       emit(const UsersState.loading());
       List<User> listUsers = await userService.getUsers();
-      emit(UsersState.received(listUsers: listUsers));
+      emit(UsersState.received(
+          listUsers: listUsers, listValues: userService.openedUsers));
     } catch (e) {
       emit(
           const UsersState.failure(error: 'Произошла ошибка получения данных'));
+    }
+  }
+
+  Future<void> _onUpdateUsers(
+    UpdateUsersViewEvent event,
+    Emitter<UsersState> emit,
+  ) async {
+    emit(const UsersState.loading());
+    try {
+      userService.updateOpenedUsers(event.userId);
+      emit(UsersState.received(
+          listUsers: userService.listUsers,
+          listValues: userService.openedUsers));
+    } catch (e) {
+      emit(const UsersState.failure(
+          error: 'Произошла ошибка обновления данных'));
     }
   }
 }

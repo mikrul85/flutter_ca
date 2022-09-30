@@ -19,32 +19,38 @@ mixin _$UsersEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() start,
+    required TResult Function(int userId) update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? start,
+    TResult Function(int userId)? update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? start,
+    TResult Function(int userId)? update,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(OpenUsersViewEvent value) start,
+    required TResult Function(UpdateUsersViewEvent value) update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(OpenUsersViewEvent value)? start,
+    TResult Function(UpdateUsersViewEvent value)? update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(OpenUsersViewEvent value)? start,
+    TResult Function(UpdateUsersViewEvent value)? update,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -108,6 +114,7 @@ class _$OpenUsersViewEvent implements OpenUsersViewEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() start,
+    required TResult Function(int userId) update,
   }) {
     return start();
   }
@@ -116,6 +123,7 @@ class _$OpenUsersViewEvent implements OpenUsersViewEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? start,
+    TResult Function(int userId)? update,
   }) {
     return start?.call();
   }
@@ -124,6 +132,7 @@ class _$OpenUsersViewEvent implements OpenUsersViewEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? start,
+    TResult Function(int userId)? update,
     required TResult orElse(),
   }) {
     if (start != null) {
@@ -136,6 +145,7 @@ class _$OpenUsersViewEvent implements OpenUsersViewEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(OpenUsersViewEvent value) start,
+    required TResult Function(UpdateUsersViewEvent value) update,
   }) {
     return start(this);
   }
@@ -144,6 +154,7 @@ class _$OpenUsersViewEvent implements OpenUsersViewEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(OpenUsersViewEvent value)? start,
+    TResult Function(UpdateUsersViewEvent value)? update,
   }) {
     return start?.call(this);
   }
@@ -152,6 +163,7 @@ class _$OpenUsersViewEvent implements OpenUsersViewEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(OpenUsersViewEvent value)? start,
+    TResult Function(UpdateUsersViewEvent value)? update,
     required TResult orElse(),
   }) {
     if (start != null) {
@@ -166,12 +178,150 @@ abstract class OpenUsersViewEvent implements UsersEvent {
 }
 
 /// @nodoc
+abstract class _$$UpdateUsersViewEventCopyWith<$Res> {
+  factory _$$UpdateUsersViewEventCopyWith(_$UpdateUsersViewEvent value,
+          $Res Function(_$UpdateUsersViewEvent) then) =
+      __$$UpdateUsersViewEventCopyWithImpl<$Res>;
+  $Res call({int userId});
+}
+
+/// @nodoc
+class __$$UpdateUsersViewEventCopyWithImpl<$Res>
+    extends _$UsersEventCopyWithImpl<$Res>
+    implements _$$UpdateUsersViewEventCopyWith<$Res> {
+  __$$UpdateUsersViewEventCopyWithImpl(_$UpdateUsersViewEvent _value,
+      $Res Function(_$UpdateUsersViewEvent) _then)
+      : super(_value, (v) => _then(v as _$UpdateUsersViewEvent));
+
+  @override
+  _$UpdateUsersViewEvent get _value => super._value as _$UpdateUsersViewEvent;
+
+  @override
+  $Res call({
+    Object? userId = freezed,
+  }) {
+    return _then(_$UpdateUsersViewEvent(
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateUsersViewEvent implements UpdateUsersViewEvent {
+  const _$UpdateUsersViewEvent({required this.userId});
+
+  @override
+  final int userId;
+
+  @override
+  String toString() {
+    return 'UsersEvent.update(userId: $userId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateUsersViewEvent &&
+            const DeepCollectionEquality().equals(other.userId, userId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(userId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$UpdateUsersViewEventCopyWith<_$UpdateUsersViewEvent> get copyWith =>
+      __$$UpdateUsersViewEventCopyWithImpl<_$UpdateUsersViewEvent>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() start,
+    required TResult Function(int userId) update,
+  }) {
+    return update(userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? start,
+    TResult Function(int userId)? update,
+  }) {
+    return update?.call(userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? start,
+    TResult Function(int userId)? update,
+    required TResult orElse(),
+  }) {
+    if (update != null) {
+      return update(userId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OpenUsersViewEvent value) start,
+    required TResult Function(UpdateUsersViewEvent value) update,
+  }) {
+    return update(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(OpenUsersViewEvent value)? start,
+    TResult Function(UpdateUsersViewEvent value)? update,
+  }) {
+    return update?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OpenUsersViewEvent value)? start,
+    TResult Function(UpdateUsersViewEvent value)? update,
+    required TResult orElse(),
+  }) {
+    if (update != null) {
+      return update(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateUsersViewEvent implements UsersEvent {
+  const factory UpdateUsersViewEvent({required final int userId}) =
+      _$UpdateUsersViewEvent;
+
+  int get userId;
+  @JsonKey(ignore: true)
+  _$$UpdateUsersViewEventCopyWith<_$UpdateUsersViewEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$UsersState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<User> listUsers) received,
+    required TResult Function(
+            List<User> listUsers, Map<String, bool> listValues)
+        received,
     required TResult Function(String error) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -179,7 +329,8 @@ mixin _$UsersState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> listUsers)? received,
+    TResult Function(List<User> listUsers, Map<String, bool> listValues)?
+        received,
     TResult Function(String error)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -187,7 +338,8 @@ mixin _$UsersState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> listUsers)? received,
+    TResult Function(List<User> listUsers, Map<String, bool> listValues)?
+        received,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) =>
@@ -278,7 +430,9 @@ class _$_UserInitialState implements _UserInitialState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<User> listUsers) received,
+    required TResult Function(
+            List<User> listUsers, Map<String, bool> listValues)
+        received,
     required TResult Function(String error) failure,
   }) {
     return initial();
@@ -289,7 +443,8 @@ class _$_UserInitialState implements _UserInitialState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> listUsers)? received,
+    TResult Function(List<User> listUsers, Map<String, bool> listValues)?
+        received,
     TResult Function(String error)? failure,
   }) {
     return initial?.call();
@@ -300,7 +455,8 @@ class _$_UserInitialState implements _UserInitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> listUsers)? received,
+    TResult Function(List<User> listUsers, Map<String, bool> listValues)?
+        received,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
@@ -395,7 +551,9 @@ class _$_UserLoadingState implements _UserLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<User> listUsers) received,
+    required TResult Function(
+            List<User> listUsers, Map<String, bool> listValues)
+        received,
     required TResult Function(String error) failure,
   }) {
     return loading();
@@ -406,7 +564,8 @@ class _$_UserLoadingState implements _UserLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> listUsers)? received,
+    TResult Function(List<User> listUsers, Map<String, bool> listValues)?
+        received,
     TResult Function(String error)? failure,
   }) {
     return loading?.call();
@@ -417,7 +576,8 @@ class _$_UserLoadingState implements _UserLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> listUsers)? received,
+    TResult Function(List<User> listUsers, Map<String, bool> listValues)?
+        received,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
@@ -474,7 +634,7 @@ abstract class _$$_UserReceivedStateCopyWith<$Res> {
   factory _$$_UserReceivedStateCopyWith(_$_UserReceivedState value,
           $Res Function(_$_UserReceivedState) then) =
       __$$_UserReceivedStateCopyWithImpl<$Res>;
-  $Res call({List<User> listUsers});
+  $Res call({List<User> listUsers, Map<String, bool> listValues});
 }
 
 /// @nodoc
@@ -491,12 +651,17 @@ class __$$_UserReceivedStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? listUsers = freezed,
+    Object? listValues = freezed,
   }) {
     return _then(_$_UserReceivedState(
       listUsers: listUsers == freezed
           ? _value._listUsers
           : listUsers // ignore: cast_nullable_to_non_nullable
               as List<User>,
+      listValues: listValues == freezed
+          ? _value._listValues
+          : listValues // ignore: cast_nullable_to_non_nullable
+              as Map<String, bool>,
     ));
   }
 }
@@ -504,8 +669,11 @@ class __$$_UserReceivedStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UserReceivedState implements _UserReceivedState {
-  const _$_UserReceivedState({required final List<User> listUsers})
-      : _listUsers = listUsers;
+  const _$_UserReceivedState(
+      {required final List<User> listUsers,
+      required final Map<String, bool> listValues})
+      : _listUsers = listUsers,
+        _listValues = listValues;
 
   final List<User> _listUsers;
   @override
@@ -514,9 +682,16 @@ class _$_UserReceivedState implements _UserReceivedState {
     return EqualUnmodifiableListView(_listUsers);
   }
 
+  final Map<String, bool> _listValues;
+  @override
+  Map<String, bool> get listValues {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_listValues);
+  }
+
   @override
   String toString() {
-    return 'UsersState.received(listUsers: $listUsers)';
+    return 'UsersState.received(listUsers: $listUsers, listValues: $listValues)';
   }
 
   @override
@@ -525,12 +700,16 @@ class _$_UserReceivedState implements _UserReceivedState {
         (other.runtimeType == runtimeType &&
             other is _$_UserReceivedState &&
             const DeepCollectionEquality()
-                .equals(other._listUsers, _listUsers));
+                .equals(other._listUsers, _listUsers) &&
+            const DeepCollectionEquality()
+                .equals(other._listValues, _listValues));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_listUsers));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_listUsers),
+      const DeepCollectionEquality().hash(_listValues));
 
   @JsonKey(ignore: true)
   @override
@@ -543,10 +722,12 @@ class _$_UserReceivedState implements _UserReceivedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<User> listUsers) received,
+    required TResult Function(
+            List<User> listUsers, Map<String, bool> listValues)
+        received,
     required TResult Function(String error) failure,
   }) {
-    return received(listUsers);
+    return received(listUsers, listValues);
   }
 
   @override
@@ -554,10 +735,11 @@ class _$_UserReceivedState implements _UserReceivedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> listUsers)? received,
+    TResult Function(List<User> listUsers, Map<String, bool> listValues)?
+        received,
     TResult Function(String error)? failure,
   }) {
-    return received?.call(listUsers);
+    return received?.call(listUsers, listValues);
   }
 
   @override
@@ -565,12 +747,13 @@ class _$_UserReceivedState implements _UserReceivedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> listUsers)? received,
+    TResult Function(List<User> listUsers, Map<String, bool> listValues)?
+        received,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
     if (received != null) {
-      return received(listUsers);
+      return received(listUsers, listValues);
     }
     return orElse();
   }
@@ -614,10 +797,12 @@ class _$_UserReceivedState implements _UserReceivedState {
 }
 
 abstract class _UserReceivedState implements UsersState {
-  const factory _UserReceivedState({required final List<User> listUsers}) =
-      _$_UserReceivedState;
+  const factory _UserReceivedState(
+      {required final List<User> listUsers,
+      required final Map<String, bool> listValues}) = _$_UserReceivedState;
 
   List<User> get listUsers;
+  Map<String, bool> get listValues;
   @JsonKey(ignore: true)
   _$$_UserReceivedStateCopyWith<_$_UserReceivedState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -690,7 +875,9 @@ class _$_UserFailureState implements _UserFailureState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<User> listUsers) received,
+    required TResult Function(
+            List<User> listUsers, Map<String, bool> listValues)
+        received,
     required TResult Function(String error) failure,
   }) {
     return failure(error);
@@ -701,7 +888,8 @@ class _$_UserFailureState implements _UserFailureState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> listUsers)? received,
+    TResult Function(List<User> listUsers, Map<String, bool> listValues)?
+        received,
     TResult Function(String error)? failure,
   }) {
     return failure?.call(error);
@@ -712,7 +900,8 @@ class _$_UserFailureState implements _UserFailureState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> listUsers)? received,
+    TResult Function(List<User> listUsers, Map<String, bool> listValues)?
+        received,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {

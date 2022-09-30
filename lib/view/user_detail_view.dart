@@ -2,6 +2,7 @@ import 'package:ca_example/data/models/user/album/thumbnail/thumbnail_model.dart
 import 'package:ca_example/data/models/user/user_model.dart';
 import 'package:ca_example/data/services/user_service.dart';
 import 'package:ca_example/domain/user_detail_bloc/user_detail_bloc.dart';
+import 'package:ca_example/domain/users_bloc/users_bloc.dart';
 import 'package:ca_example/view/user_albums_view.dart';
 import 'package:ca_example/view/user_posts_view.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,13 @@ class UserDetailViewBody extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                BlocBuilder<UserDetailBloc, UserDetailState>(
+                BlocConsumer<UserDetailBloc, UserDetailState>(
+                  listener: (context, state) {
+                    state.mapOrNull(
+                        loading: ((_) => context
+                            .read<UsersBloc>()
+                            .add(UsersEvent.update(userId: user.id))));
+                  },
                   builder: (context, state) {
                     return state.when(
                       initial: () => const SizedBox(),
