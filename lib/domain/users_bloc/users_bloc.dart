@@ -1,3 +1,4 @@
+import 'package:ca_example/data/api/user_sqlite_api/user_sqlite_api.dart';
 import 'package:ca_example/data/models/user/user_model.dart';
 import 'package:ca_example/data/services/user_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +10,7 @@ part 'users_event.dart';
 part 'users_state.dart';
 
 class UsersBloc extends Bloc<UsersEvent, UsersState> {
-  final UserService userService;
+  final IUserService userService;
   UsersBloc({required this.userService}) : super(const UsersState.initial()) {
     on<OpenUsersViewEvent>(_onOpenUsers);
     on<UpdateUsersViewEvent>(_onUpdateUsers);
@@ -23,10 +24,9 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
       emit(const UsersState.loading());
       List<User> listUsers = await userService.getUsers();
       emit(UsersState.received(
-          listUsers: listUsers, listValues: userService.openedUsers));
+          listUsers: listUsers, listValues: userService.getOpenedUsers));
     } catch (e) {
-      emit(
-          const UsersState.failure(error: 'Произошла ошибка получения данных'));
+      emit(UsersState.failure(error: 'Произошла ошибка получения данных: $e'));
     }
   }
 
@@ -38,8 +38,8 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     try {
       userService.updateOpenedUsers(event.userId);
       emit(UsersState.received(
-          listUsers: userService.listUsers,
-          listValues: userService.openedUsers));
+          listUsers: userService.getListUsers,
+          listValues: userService.getOpenedUsers));
     } catch (e) {
       emit(const UsersState.failure(
           error: 'Произошла ошибка обновления данных'));
