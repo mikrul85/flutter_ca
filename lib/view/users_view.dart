@@ -1,4 +1,6 @@
 import 'package:ca_example/domain/users_bloc/users_bloc.dart';
+import 'package:ca_example/resources/styles_manager.dart';
+import 'package:ca_example/resources/values_manager.dart';
 import 'package:ca_example/view/user_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,23 +58,21 @@ class _UsersViewState extends State<UsersView> {
                       ),
                       child: Container(
                         decoration: const BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1))),
-                        padding: const EdgeInsets.symmetric(vertical: 10),
+                            border: Border(
+                                bottom: BorderSide(width: AppBorder.b1))),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: AppPadding.p10),
                         child: Column(
                           children: [
                             Text(
                               listUsers[index].username,
-                              style: TextStyle(
-                                  fontWeight: userOpenedValue
-                                      ? FontWeight.normal
-                                      : FontWeight.bold),
+                              style: getNormalOrBoldStyle(
+                                  isBold: !userOpenedValue),
                             ),
                             Text(
                               listUsers[index].name,
-                              style: TextStyle(
-                                  fontWeight: userOpenedValue
-                                      ? FontWeight.normal
-                                      : FontWeight.bold),
+                              style: getNormalOrBoldStyle(
+                                  isBold: !userOpenedValue),
                             ),
                           ],
                         ),
