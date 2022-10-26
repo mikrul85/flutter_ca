@@ -653,13 +653,235 @@ class $PostsTableTable extends PostsTable
   }
 }
 
+class AlbumPhotosTableData extends DataClass
+    implements Insertable<AlbumPhotosTableData> {
+  final int albumId;
+  final int userId;
+  final List<Photo>? photos;
+  const AlbumPhotosTableData(
+      {required this.albumId, required this.userId, this.photos});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['album_id'] = Variable<int>(albumId);
+    map['user_id'] = Variable<int>(userId);
+    if (!nullToAbsent || photos != null) {
+      final converter = $AlbumPhotosTableTable.$converter0n;
+      map['photos'] = Variable<String>(converter.toSql(photos));
+    }
+    return map;
+  }
+
+  AlbumPhotosTableCompanion toCompanion(bool nullToAbsent) {
+    return AlbumPhotosTableCompanion(
+      albumId: Value(albumId),
+      userId: Value(userId),
+      photos:
+          photos == null && nullToAbsent ? const Value.absent() : Value(photos),
+    );
+  }
+
+  factory AlbumPhotosTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AlbumPhotosTableData(
+      albumId: serializer.fromJson<int>(json['albumId']),
+      userId: serializer.fromJson<int>(json['userId']),
+      photos: serializer.fromJson<List<Photo>?>(json['photos']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'albumId': serializer.toJson<int>(albumId),
+      'userId': serializer.toJson<int>(userId),
+      'photos': serializer.toJson<List<Photo>?>(photos),
+    };
+  }
+
+  AlbumPhotosTableData copyWith(
+          {int? albumId,
+          int? userId,
+          Value<List<Photo>?> photos = const Value.absent()}) =>
+      AlbumPhotosTableData(
+        albumId: albumId ?? this.albumId,
+        userId: userId ?? this.userId,
+        photos: photos.present ? photos.value : this.photos,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('AlbumPhotosTableData(')
+          ..write('albumId: $albumId, ')
+          ..write('userId: $userId, ')
+          ..write('photos: $photos')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(albumId, userId, photos);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AlbumPhotosTableData &&
+          other.albumId == this.albumId &&
+          other.userId == this.userId &&
+          other.photos == this.photos);
+}
+
+class AlbumPhotosTableCompanion extends UpdateCompanion<AlbumPhotosTableData> {
+  final Value<int> albumId;
+  final Value<int> userId;
+  final Value<List<Photo>?> photos;
+  const AlbumPhotosTableCompanion({
+    this.albumId = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.photos = const Value.absent(),
+  });
+  AlbumPhotosTableCompanion.insert({
+    required int albumId,
+    required int userId,
+    this.photos = const Value.absent(),
+  })  : albumId = Value(albumId),
+        userId = Value(userId);
+  static Insertable<AlbumPhotosTableData> custom({
+    Expression<int>? albumId,
+    Expression<int>? userId,
+    Expression<String>? photos,
+  }) {
+    return RawValuesInsertable({
+      if (albumId != null) 'album_id': albumId,
+      if (userId != null) 'user_id': userId,
+      if (photos != null) 'photos': photos,
+    });
+  }
+
+  AlbumPhotosTableCompanion copyWith(
+      {Value<int>? albumId, Value<int>? userId, Value<List<Photo>?>? photos}) {
+    return AlbumPhotosTableCompanion(
+      albumId: albumId ?? this.albumId,
+      userId: userId ?? this.userId,
+      photos: photos ?? this.photos,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (albumId.present) {
+      map['album_id'] = Variable<int>(albumId.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<int>(userId.value);
+    }
+    if (photos.present) {
+      final converter = $AlbumPhotosTableTable.$converter0n;
+      map['photos'] = Variable<String>(converter.toSql(photos.value));
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AlbumPhotosTableCompanion(')
+          ..write('albumId: $albumId, ')
+          ..write('userId: $userId, ')
+          ..write('photos: $photos')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $AlbumPhotosTableTable extends AlbumPhotosTable
+    with TableInfo<$AlbumPhotosTableTable, AlbumPhotosTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AlbumPhotosTableTable(this.attachedDatabase, [this._alias]);
+  final VerificationMeta _albumIdMeta = const VerificationMeta('albumId');
+  @override
+  late final GeneratedColumn<int> albumId = GeneratedColumn<int>(
+      'album_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  final VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<int> userId = GeneratedColumn<int>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints: 'REFERENCES "user_table" ("id")');
+  final VerificationMeta _photosMeta = const VerificationMeta('photos');
+  @override
+  late final GeneratedColumnWithTypeConverter<List<Photo>?, String> photos =
+      GeneratedColumn<String>('photos', aliasedName, true,
+              type: DriftSqlType.string, requiredDuringInsert: false)
+          .withConverter<List<Photo>?>($AlbumPhotosTableTable.$converter0n);
+  @override
+  List<GeneratedColumn> get $columns => [albumId, userId, photos];
+  @override
+  String get aliasedName => _alias ?? 'album_photos_table';
+  @override
+  String get actualTableName => 'album_photos_table';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<AlbumPhotosTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('album_id')) {
+      context.handle(_albumIdMeta,
+          albumId.isAcceptableOrUnknown(data['album_id']!, _albumIdMeta));
+    } else if (isInserting) {
+      context.missing(_albumIdMeta);
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    context.handle(_photosMeta, const VerificationResult.success());
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
+  @override
+  AlbumPhotosTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AlbumPhotosTableData(
+      albumId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}album_id'])!,
+      userId: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}user_id'])!,
+      photos: $AlbumPhotosTableTable.$converter0n.fromSql(attachedDatabase
+          .options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}photos'])),
+    );
+  }
+
+  @override
+  $AlbumPhotosTableTable createAlias(String alias) {
+    return $AlbumPhotosTableTable(attachedDatabase, alias);
+  }
+
+  static TypeConverter<List<Photo>, String> $converter0 =
+      const AlbumPhotosListConverter();
+  static TypeConverter<List<Photo>?, String?> $converter0n =
+      NullAwareTypeConverter.wrap($converter0);
+}
+
 abstract class _$MyDatabase extends GeneratedDatabase {
   _$MyDatabase(QueryExecutor e) : super(e);
   late final $UserTableTable userTable = $UserTableTable(this);
   late final $PostsTableTable postsTable = $PostsTableTable(this);
+  late final $AlbumPhotosTableTable albumPhotosTable =
+      $AlbumPhotosTableTable(this);
   @override
   Iterable<TableInfo<Table, dynamic>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [userTable, postsTable];
+  List<DatabaseSchemaEntity> get allSchemaEntities =>
+      [userTable, postsTable, albumPhotosTable];
 }

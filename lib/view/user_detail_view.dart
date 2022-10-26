@@ -172,6 +172,7 @@ class UserDetailViewBody extends StatelessWidget {
                               TextButton(
                                 onPressed: () => Navigator.of(context)
                                     .push<void>(UserAlbumsView.route(
+                                  userId: user.id,
                                   listAlbums: listAlbums,
                                   listTn: listTn,
                                 )),
